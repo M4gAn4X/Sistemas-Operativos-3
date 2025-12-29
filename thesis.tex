@@ -1,0 +1,45 @@
+\documentclass[letterpaper,12pt]{report}
+\usepackage{thesis}
+
+\begin{document}
+
+% ----- Páginas preliminares en números romanos -----
+\pagenumbering{roman}
+
+% ----- Portada -----
+\thesistitle
+{Proyecto de Investigación: \\
+	Análisis, Diseño y Construcción de un Sistema Operativo desde Cero}
+{\emph{\copyright\ Magaña Osorio Jhoel Fabrizzio}\\
+	\emph{\copyright\ Colque Quispe Fidel Enrique}\\
+	\emph{\copyright\ Montalvo Sol\'orzano Rosy Aurely}\\
+	\emph{\copyright\ Quispe Llavilla Jhon Andherson}}
+{Docente: \emph{Ugarte Rojas Hector Ugarte}}
+{Universidad Nacional de San Antonio Abad del Cusco\\
+	Facultad de Ingeniería Eléctrica, Electrónica, Informática y Mecánica \\
+	Escuela Profesional de Ingeniería Informática y de Sistemas}
+{\emph{Cusco - Perú\\2025}}
+
+% ----- Índices (TOC/LOT/LOF) -----
+% Asegúrate de que contents.tex, tables.tex y figures.tex
+% contengan \tableofcontents, \listoftables y \listoffigures respectivamente.
+\include{contents}
+\include{tables}
+\include{figures}
+
+% ----- Cuerpo en arábigos -----
+\pagenumbering{arabic}
+
+\include{chap1}
+\include{chap2}
+\include{chap3}
+\include{chap4}
+% ----- Bibliografía (BibTeX + apacite) -----
+% Elimina cualquier \include{bib} para evitar duplicados.
+\include{bib}
+
+% ----- Apéndices (opcional) -----
+% \appendix
+% \include{apdxa}
+
+\end{document}
