@@ -1,5 +1,42 @@
 \section{Argumentos pedagógicos}
 \subsection{Claridad conceptual y didáctica}
+SerenityOS presenta una base de código organizada por dominios del sistema, lo que permite ubicar conceptos del curso dentro de un contexto real de implementación. A nivel didáctico, esto facilita trabajar con definiciones operativas.
+
+La propuesta también permite separar el aprendizaje en dos niveles: (i) comprensión conceptual (modelos, estados y responsabilidades de cada tema del curso) y (ii) observación/lectura de implementación (estructuras, llamadas y flujos de ejecución que materializan esos modelos). Esta separación ayuda a mantener el énfasis educativo sin depender de suposiciones, ya que los conceptos se contrastan con comportamiento visible.
 \subsection{Aprendizaje activo y experimental}
+El uso de SerenityOS como base permite trabajar con un sistema operativo real en un entorno controlado (máquina virtual), lo que habilita prácticas centradas en observación, medición y verificación. Las actividades se pueden estructurar como ciclos cortos: modificar, compilar, ejecutar y comprobar el comportamiento del sistema, registrando evidencia (salidas de consola, trazas, fallos reproducibles o cambios observables).
+
+En el curso, el aprendizaje activo se materializa en ejercicios donde el estudiante:
+\begin{itemize}
+	\item inspecciona el comportamiento del sistema a partir de su ejecución,
+	\item formula hipótesis sobre el funcionamiento de un subsistema,
+	\item realiza un cambio acotado en el código o configuración,
+	\item valida el resultado con pruebas o escenarios reproducibles.
+\end{itemize}
+
+Este enfoque favorece el aprendizaje experimental porque obliga a trabajar con restricciones reales de un sistema operativo: interacción con el hardware (indirecta mediante virtualización), estados de ejecución concurrentes y efectos de rendimiento/consumo de recursos que pueden compararse entre iteraciones.
+
 \subsection{Relación con los contenidos del curso}
+Los contenidos desarrollados en el curso se relacionan directamente con las áreas de un sistema operativo que pueden analizarse y documentarse a partir de SerenityOS como sistema base. La correspondencia se plantea en términos conceptuales, de forma que cada tema del curso tenga un punto de observación y una evidencia asociada en el sistema.
+
+Temas del curso y su relación con el sistema base:
+\begin{itemize}
+	\item \textbf{Fundamentos de hardware:} arquitectura, memoria y buses se conectan con el modelo de ejecución del sistema y la organización de sus componentes de bajo nivel.
+	\item \textbf{Procesos:} creación, estados, planificación y finalización se reflejan en la administración de tareas del sistema y en la forma en que se ejecutan programas.
+	\item \textbf{Hilos:} concurrencia y sincronización se observan en la ejecución simultánea y en mecanismos de coordinación entre unidades de ejecución.
+	\item \textbf{Comunicación entre hilos:} se relaciona con primitivas de sincronización, intercambio de información y manejo de secciones críticas.
+	\item \textbf{Gestión de memoria:} asignación, paginación/segmentación (según el enfoque del sistema) y protección se conectan con el soporte de memoria virtual y el aislamiento entre espacios de ejecución.
+	\item \textbf{Técnicas de gestión de memoria:} se vinculan con políticas de asignación/liberación y estrategias para reducir fragmentación o mejorar rendimiento.
+	\item \textbf{Sistema de archivos:} estructura, metadatos, permisos y operaciones se conectan con la capa de almacenamiento y acceso a archivos.
+	\item \textbf{Gestión de entradas y salidas:} dispositivos, buffers y controladores se relacionan con la interacción del sistema con hardware y periféricos, sea en virtualización o en ejecución real.
+\end{itemize}
+
 \subsection{Trabajo colaborativo y evaluación progresiva}
+El trabajo colaborativo se estructura mediante división de responsabilidades por temas del curso.
+
+La evaluación progresiva se organiza por eventos:
+\begin{itemize}
+	\item configuración del entorno y ejecución controlada del sistema en máquina virtual,
+	\item levantamiento de evidencias (salidas, trazas o resultados observables) asociadas a los temas del curso,
+	\item documentación técnica del diseño propuesto.
+\end{itemize}

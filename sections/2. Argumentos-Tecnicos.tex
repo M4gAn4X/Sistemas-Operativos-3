@@ -1,10 +1,10 @@
 \section{Argumentos técnicos}
 \subsection{Compatibilidad con herramientas de desarrollo}
-SerenityOS define un entorno de desarrollo basado en herramientas estándar del ecosistema de compilación en Linux. El proyecto detalla dependencias y versiones mínimas de componentes críticos del entorno: compilador anfitrión moderno, CMake (versión mínima indicada), sistema de construcción (Ninja), y un entorno de ejecución virtualizado con QEMU (versión mínima indicada).
+SerenityOS define un entorno de desarrollo basado en herramientas estándar del ecosistema de compilación en Linux. La guía de construcción especifica dependencias y versiones mínimas de componentes críticos del entorno: compilador anfitrión moderno, CMake (versión mínima indicada), sistema de construcción (Ninja) y un entorno de ejecución virtualizado con QEMU (versión mínima indicada).
 
-Adicionalmente, se requieren utilidades auxiliares para construir la toolchain cruzada, generar imágenes y soportar el ciclo de desarrollo (por ejemplo, herramientas de sincronización y caché de compilación). La guía de construcción también describe consideraciones de instalación por distribución y problemas frecuentes de configuración.
+El flujo de trabajo de construcción incluye utilidades auxiliares para la toolchain cruzada, generación de imágenes y tareas de soporte del ciclo de desarrollo (por ejemplo, sincronización y caché de compilación). La misma guía describe instalación por distribución y casos comunes de configuración.
 
-Herramientas principales documentadas:
+Herramientas utilizadas en el flujo de desarrollo:
 \begin{itemize}
 	\item Sistema de build: CMake y Ninja
 	\item Ejecución/virtualización: QEMU
@@ -12,17 +12,19 @@ Herramientas principales documentadas:
 \end{itemize}
 
 \subsection{Modularidad y posibilidad de adaptación}
-SerenityOS presenta una organización del código orientada a separar áreas funcionales del sistema (por ejemplo, kernel, bibliotecas, servicios y aplicaciones). Esta estructura delimita responsabilidades y separa capas de ejecución, permitiendo analizar partes del sistema de forma aislada.
+SerenityOS presenta una organización del código orientada a separar áreas funcionales del sistema (por ejemplo, kernel, bibliotecas, servicios y aplicaciones). Esta estructura delimita responsabilidades y separa capas de ejecución.
 
-Para la adaptación al proyecto, esta modularidad admite definir un alcance incremental: iniciar con un subconjunto acotado del sistema y extenderlo por iteraciones, con criterios de compilación y verificación por etapa.
+En el desarrollo, el repositorio contiene componentes con directorios y convenciones de construcción que distinguen código del sistema, bibliotecas y aplicaciones, manteniendo dependencias explícitas a través del sistema de build.
 
-En términos de adaptación del entorno, el flujo de construcción contempla compilación cruzada y soporta múltiples arquitecturas, con objetivos de ejecución configurables por arquitectura.
+El flujo de construcción contempla compilación cruzada y soporta múltiples arquitecturas, con directorios de salida y objetivos de ejecución diferenciados por arquitectura.
 
 \subsection{Lenguaje de programación utilizado}
-SerenityOS es un proyecto cuyo desarrollo se realiza principalmente en C++, complementado por otros lenguajes usados en componentes específicos y en el sistema de construcción. En el repositorio se observa C++ como lenguaje predominante y, además, la presencia de lenguajes auxiliares para utilidades, scripts y partes del entorno.
+SerenityOS es un proyecto cuyo desarrollo se realiza principalmente en C++. En el repositorio se observa C++ como lenguaje predominante y la presencia de lenguajes auxiliares para utilidades, scripts y partes del entorno.
+
+El entorno de construcción exige un compilador anfitrión moderno con soporte de características recientes de C++ para construir herramientas del host.
 
 \subsection{Facilidad de compilación, prueba y depuración}
-El proyecto provee un script principal que unifica tareas frecuentes de desarrollo. El comando estándar construye el sistema, instala los artefactos en un directorio de salida por arquitectura y lanza la máquina virtual; adicionalmente, existe un modo para compilar sin arrancar la VM.
+El proyecto utiliza un script principal para tareas del ciclo de desarrollo. El comando estándar construye el sistema, instala los artefactos en un directorio de salida por arquitectura y lanza la máquina virtual. El flujo también incluye un modo de compilación sin arranque de la VM.
 
 Antes de compilar, se requiere instalar un conjunto de dependencias del sistema anfitrión. Se considera el siguiente conjunto de paquetes (dependencias de compilación, herramientas de build, emulación y utilidades auxiliares):
 \begin{verbatim}
@@ -31,9 +33,9 @@ libgmp-dev e2fsprogs ninja-build qemu-system-gui qemu-system-x86
 qemu-utils ccache rsync unzip texinfo libssl-dev zlib1g-dev
 \end{verbatim}
 
-Como requisitos mínimos del toolchain, se solicita un compilador anfitrión moderno con soporte de características recientes de C++ (por ejemplo, GCC 13 o Clang 17 o superior). Asimismo, se establecen versiones mínimas de herramientas clave del entorno, como QEMU (6.2 o superior) y CMake (3.25.0 o superior). En caso de contar con una versión de CMake anterior, el flujo de build contempla compilar CMake desde fuente; si se migra desde una versión antigua, puede ser necesario limpiar el caché de CMake del directorio de compilación.
+Como requisitos mínimos del toolchain, se solicita un compilador anfitrión moderno con soporte de características recientes de C++ (por ejemplo, GCC 13 o Clang 17 o superior). El entorno establece versiones mínimas de herramientas clave, como QEMU (6.2 o superior) y CMake (3.25.0 o superior). Si se migra desde una versión anterior de CMake, se considera la limpieza del caché de CMake en el directorio de compilación.
 
 \subsection{Escalabilidad para futuras extensiones}
-SerenityOS incluye un sistema de \emph{ports} que permite incorporar software adicional mediante scripts de empaquetado y un flujo de compilación integrado.
+SerenityOS incluye un sistema de \emph{ports} para incorporar software adicional mediante scripts de empaquetado y un flujo de compilación integrado.
 
-El proyecto también mantiene documentación complementaria para escenarios de construcción menos comunes y para opciones avanzadas del sistema de build.
+El proyecto mantiene documentación complementaria para escenarios de construcción menos comunes y para opciones avanzadas del sistema de build.
