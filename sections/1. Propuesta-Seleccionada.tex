@@ -2,7 +2,23 @@
 
 \section{Justificación de la propuesta seleccionada}
 \subsection{Sistema operativo base seleccionado}
+Se elige SerenityOS como base. Es un sistema operativo \emph{Unix-like} (inspirado en la familia de sistemas tipo Unix) orientado a escritorio, con código fuente público y un conjunto amplio de componentes de sistema y aplicaciones de usuario. La propuesta incluye entorno gráfico, herramientas de línea de comandos, bibliotecas propias y utilidades del sistema, lo que permite observar la integración entre kernel y espacio de usuario en un sistema completo.
+
 \subsection{Objetivos del proyecto original}
+El proyecto SerenityOS tiene como objetivo construir un sistema operativo completo orientado a escritorio, con énfasis en coherencia del sistema, calidad del código y una experiencia de usuario integrada. Se desarrolla como un proyecto de ingeniería de software a largo plazo, con énfasis en consistencia de interfaces, herramientas de desarrollo internas y un estilo de implementación uniforme. Adicionalmente, busca mantener una base de código legible y mantenible.
+
 \subsection{Arquitectura y enfoque técnico}
+SerenityOS adopta un enfoque de kernel monolítico con organización modular y un espacio de usuario con interfaces y herramientas de estilo POSIX. El sistema se organiza en subsistemas claramente delimitados y un conjunto de bibliotecas y aplicaciones que se construyen de forma conjunta con el kernel. Este enfoque facilita analizar el flujo de construcción, arranque y ejecución desde la inicialización del sistema hasta la interacción del usuario con los servicios del entorno.
+
 \subsection{Nivel de complejidad y adecuación al contexto educativo}
+SerenityOS presenta una complejidad intermedia-alta: es un sistema grande, con múltiples subsistemas, pero con una estructura de código consistente. En un curso de sistemas operativos, esto permite separar el trabajo por temas y mantener criterios de verificación por componente. La complejidad también exige establecer un entorno de compilación, pruebas y depuración reproducible desde el inicio del proyecto.
+
 \subsection{Comunidad, documentación y soporte disponible}
+El proyecto cuenta con un repositorio público y una comunidad activa que gestiona incidencias, revisiones y mejoras continuas. Su historial de cambios y discusión técnica es accesible a través del sistema de issues y revisiones de código. Asimismo, dispone de documentación pública y recursos de soporte comunitario para el uso y comprensión del sistema.
+
+Enlaces principales:
+\begin{itemize}
+	\item Repositorio oficial (código fuente e issues): \url{https://github.com/SerenityOS/serenity}
+	\item Sitio oficial del proyecto: \url{https://serenityos.org/}
+	\item Manual del sistema (manpages): \url{https://man.serenityos.org/}
+\end{itemize}
