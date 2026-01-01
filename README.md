@@ -92,7 +92,7 @@ Después de compilar tu proyecto, pueden generarse archivos auxiliares (como `.a
 
 Primero, debes clonar el repositorio en tu máquina local:
 ```bash
-git clone https://github.com/M4gAn4X/Sistemas-Operativos-3.gits
+git clone https://github.com/M4gAn4X/Sistemas-Operativos-3.git
 ```
 
 ### 2. Crear tu rama
