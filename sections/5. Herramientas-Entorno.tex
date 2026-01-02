@@ -1,7 +1,90 @@
 
 \section{Herramientas y entorno de desarrollo}
 \subsection{Lenguajes de programación}
+El repositorio oficial de SerenityOS utiliza múltiples lenguajes. De acuerdo con las estadísticas de lenguajes publicadas por GitHub (endpoint \texttt{https://api.github.com/repos/SerenityOS/serenity/languages}), el volumen principal del código está en C++ y, en menor proporción, en otros lenguajes usados para subsistemas, tooling y automatización. En los valores reportados (en bytes) se observan, entre otros:
+
+\begin{itemize}
+		\item C++: \texttt{46966564}
+		\item JavaScript: \texttt{2387389}
+		\item HTML: \texttt{1775193}
+		\item Shell: \texttt{442848}
+		\item CMake: \texttt{440499}
+		\item C: \texttt{435237}
+		\item Python: \texttt{225053}
+		\item Assembly: \texttt{59192}
+\end{itemize}
+
+Para construir herramientas de host, la guía oficial de compilación indica un compilador en el host con soporte de C++23; versiones probadas incluyen GCC 13 y Clang 17 a 19.
+
 \subsection{Compilador cruzado}
+Para esta parte del informe, el entorno de compilación utilizado es un sistema Arch Linux de 64 bits (x86\_64). La guía oficial de SerenityOS define que el proceso de build incluye un compilador cruzado (toolchain) que se construye automáticamente la primera vez que se ejecuta el flujo de compilación.
+
+Dependencias en Arch Linux:
+
+\begin{verbatim}
+sudo pacman -S --needed \
+	base-devel cmake curl mpfr libmpc gmp e2fsprogs ninja qemu-desktop \
+	qemu-system-aarch64 ccache rsync unzip
+
+# Opcional:
+# - fuse2fs (imágenes sin root)
+# - clang llvm llvm-libs (para compilar con Clang)
+\end{verbatim}
+
+Clonado del repositorio y navegación:
+\begin{verbatim}
+git clone https://github.com/SerenityOS/serenity.git
+cd serenity
+\end{verbatim}
+
+Construcción del toolchain y compilación/ejecución (driver \texttt{Meta/serenity.sh}):
+\begin{verbatim}
+# Compila todo y ejecuta en QEMU.
+Meta/serenity.sh run
+
+# Compila sin arrancar la VM.
+Meta/serenity.sh build
+\end{verbatim}
+
+En la primera ejecución de \texttt{Meta/serenity.sh run}, la guía indica que el script (i) descarga archivos de base requeridos desde Internet y (ii) construye la toolchain cruzada; estos pasos se realizan una sola vez y el resto de builds se ejecutan más rápido.
+
+Estructura de salida y rutas relevantes descritas por la guía:
+\begin{itemize}
+		\item Directorio de instalación de artefactos: \texttt{Build/<architecture>/Root}
+		\item Arquitecturas soportadas por el flujo: \texttt{x86\_64}, \texttt{aarch64}, \texttt{riscv64}
+\end{itemize}
+
+En el caso \texttt{x86\_64}, la configuración recomendada para herramientas de análisis estático (p.
+ej., clangd) utiliza como referencia el \texttt{compile\_commands.json} bajo \texttt{Build/x86\_64/compile\_commands.json} y el compilador cruzado ubicado bajo \texttt{Toolchain/Local/x86\_64/bin/}, con ejecutables como \texttt{x86\_64-pc-serenity-g++}.
+
 \subsection{Emulación y virtualización}
+La guía de compilación indica que \texttt{Meta/serenity.sh run} inicia SerenityOS usando QEMU, además de construir el sistema e instalar los artefactos bajo \texttt{Build/<architecture>/Root}. En la primera ejecución, el tiempo extra está asociado a la descarga de bases requeridas y a la construcción de la toolchain cruzada. En ejecuciones posteriores (con toolchain ya preparada) el flujo típico es: compilar incrementalmente y lanzar directamente la VM.
+
+Durante \texttt{Meta/serenity.sh run} el script puede solicitar credenciales de administrador mediante \texttt{sudo} para operaciones del host relacionadas con la ejecución (según configuración del sistema). En el flujo normal, al finalizar, se abre una ventana de QEMU y el sistema operativo se emula/arranca automáticamente.
+
+Requisito de versión: QEMU 6.2 o superior. Si el sistema no dispone de esa versión, la guía contempla compilar una versión recomendada mediante \texttt{Toolchain/BuildQemu.sh}.
+
+Dependencias adicionales para compilar QEMU en Debian/Ubuntu (según la guía):
+\begin{verbatim}
+sudo apt install libgtk-3-dev libpixman-1-dev libsdl2-dev libslirp-dev \
+	libspice-server-dev
+\end{verbatim}
+
+Opcional: \texttt{fuse2fs} para construir imágenes sin privilegios de administrador. La guía documenta que, si aparece el error \texttt{fusermount: failed to open /etc/mtab}, se crea el enlace \texttt{/etc/mtab} hacia \texttt{/proc/self/mounts}.
+
 \subsection{Control de versiones}
+Se utiliza Git como sistema de control de versiones para el informe y para el seguimiento del código del sistema base. El repositorio oficial de SerenityOS se encuentra en GitHub: \texttt{https://github.com/SerenityOS/serenity}.
+
 \subsection{Editor y entorno de desarrollo}
+Para desarrollo de código, SerenityOS no impone un IDE único: es posible trabajar con editores como Vim, Emacs o entornos gráficos. Para el proyecto se utilizará Visual Studio Code.
+
+Configuración y herramientas de VS Code recomendadas por la documentación de SerenityOS:
+\begin{itemize}
+		\item Extensiones sugeridas: \texttt{clangd}, \texttt{GitLens}, y soporte para Jakt (si se usa).
+		\item Configuración de workspace: ajustes en \texttt{.vscode/settings.json} para excluir directorios generados (\texttt{Build/}, \texttt{Toolchain/Local/}, etc.) y parámetros de clangd.
+		\item Base para IntelliSense/diagnóstico: \texttt{compile\_commands.json} generado en \texttt{Build/<arch>/compile\_commands.json}.
+\end{itemize}
+
+Formateo y estilo (según la guía \textit{Serenity C++ coding style}): el estilo de bajo nivel se deriva del archivo \texttt{.clang-format} en la raíz del repositorio, y se indica usar \texttt{clang-format} versión 20 o superior.
+
+Para el documento de este informe, se utiliza Visual Studio Code con LaTeX Workshop para compilación y vista previa.
