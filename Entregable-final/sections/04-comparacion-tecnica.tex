@@ -1,0 +1,108 @@
+\chapter{Comparaci\'on T\'ecnica}
+
+A continuaci\'on se presenta una comparaci\'on entre distinto sistemas operativos, para ello considerando la arquitectura del kernel, lenguaje de implementaci\'on, soporte de hardware, documentaci\'on y nivel de complejidad.
+
+\begin{landscape}
+% Poner esta tabla al final como resumen - nomas este es un ejemplo de uso 
+\begin{muntab}{lll}{comparacionSO1}{Comparación técnica de sistemas operativos - Arquitectura y lenguaje}
+\hline
+\textbf{Sistema} & \textbf{Arquitectura} & \textbf{Lenguaje} \\
+\hline
+GNU/Linux & Monolítico modular (módulos cargables) & C, ASM; Rust (drivers recientes) \\
+FreeBSD & Monolítico con modularidad & C, ASM \\
+Minix 3 & Microkernel (servicios en userland) & C, ASM \\
+Redox OS & Microkernel (drivers en userland) & Rust \\
+Microsoft Windows & Híbrido (NT: Executive + Kernel) & C, C++, ASM; C\# en capas altas \\
+SerenityOS & Monolítico estilo Unix & C++20 (lib propia) \\
+FreeRTOS & Kernel RTOS monolítico, preemptivo & C (port específico con ASM) \\
+macOS (Darwin/XNU) & Híbrido (Mach + BSD + I/O Kit) & C (Mach/BSD), C++ (I/O Kit) \\
+Haiku OS & Híbrido (derivado de NewOS) & C++ (API/GUI); C \\
+Android (AOSP) & Kernel Linux monolítico + framework & C/C++ (kernel/nativo), Java/Kotlin (framework) \\
+\hline
+\end{muntab}
+\end{landscape}
+
+\begin{landscape}
+\begin{muntab}{llll}{comparacionSO2}{Comparación técnica de sistemas operativos - Tamaño, Kernel y soporte}
+\hline
+\textbf{Sistema} & \textbf{Tamaño} & \textbf{Kernel} & \textbf{Soporte} \\
+\hline
+GNU/Linux & Muy grande & Linux & Comunitario + empresas; LTS \\
+FreeBSD & Grande & FreeBSD & Core Team / FreeBSD Foundation \\
+
+Minix 3 & Pequeño/Mediano & MINIX (microkernel) & Académico/comunitario \\
+
+Redox OS & Mediano & Redox (microkernel) & Comunitario (GitHub) \\
+
+Microsoft Windows & Muy grande & Windows NT & Comercial (Microsoft) \\
+
+SerenityOS & Mediano & Serenity & Comunitario (GitHub) \\
+
+FreeRTOS & Muy pequeño & FreeRTOS & MIT; soporte AWS (LTS) \\
+
+macOS (Darwin/XNU) & Muy grande & XNU & Comercial (Apple); base Darwin abierta \\
+
+Haiku OS & Mediano & Haiku & Comunitario (Haiku, Inc.) \\
+
+Android (AOSP) & Muy grande & Linux (ramas Android) & Google/OEMs (AOSP + CDD) \\
+\hline
+\end{muntab}
+\end{landscape}
+
+\begin{landscape}
+\begin{muntab}{lll}{comparacionSO3a}{Comparación técnica de sistemas operativos - HW (Arquitecturas) y documentación}
+\hline
+\textbf{Sistema} & \textbf{HW (arquitecturas)} & \textbf{Documentación} \\
+\hline
+GNU/Linux & x86/x86\_64, ARM/ARM64, RISC-V, PowerPC, más & kernel.org; TLDP; guías de distros \\
+
+FreeBSD & x86/x86\_64, ARM/ARM64, PowerPC, RISC-V & FreeBSD Handbook; man pages \\
+
+Minix 3 & x86/x86\_64 (ports limitados) & minix3.org; Design Doc; man \\
+
+Redox OS & x86\_64 (ports en progreso) & Redox Book; repos oficiales \\
+
+Microsoft Windows & x86\_64, ARM64 & Microsoft Learn; Windows Internals \\
+
+SerenityOS & x86\_64 (AArch64 en progreso) & Wiki/Repo oficial; guías build \\
+
+FreeRTOS & MCU: ARM Cortex-M, RISC-V, AVR, ESP32, etc. & freertos.org; getting started; API \\
+
+macOS (Darwin/XNU) & ARM64 (Apple Silicon); x86\_64 legado & Apple Open Source; docs dev \\
+
+Haiku OS & x86\_64 (x86; ports ARM en trabajo) & Haiku User/Dev Guides; repos \\
+
+Android (AOSP) & ARM/ARM64 (principal), x86/x86\_64 & source.android.com; dev docs \\
+\hline
+\end{muntab}
+
+\end{landscape}
+
+\begin{landscape}
+\begin{muntab}{ll}{comparacionSO3b}{Comparación técnica de sistemas operativos - Comunidad}
+\hline
+\textbf{Sistema} & \textbf{Comunidad} \\
+\hline
+GNU/Linux & Muy grande, global \\
+
+FreeBSD & Grande/estable \\
+
+Minix 3 & Pequeña, enfocada en docencia \\
+
+Redox OS & Pequeña/activa (investigación) \\
+
+Microsoft Windows & Muy grande (ecosistema comercial) \\
+
+SerenityOS & Pequeña/entusiasta, muy activa \\
+
+FreeRTOS & Muy grande en embebidos \\
+
+macOS (Darwin/XNU) & Grande (cerrado con OSS parcial) \\
+
+Haiku OS & Mediana/pequeña; organizada \\
+
+Android (AOSP) & Enorme (fabricantes/devs) \\
+\hline
+\end{muntab}
+
+\end{landscape}

@@ -6,30 +6,14 @@ Este proyecto está basado en LaTeX y tiene como objetivo generar un documento p
 
 ### En Windows (usando MixTeX)
 
-1. **Descargar MiKTeX**
-   - Visita el sitio oficial:  
-     https://miktex.org/download
-   - Descarga el instalador correspondiente a tu versión de Windows.
+1. **Descargar MixTeX:**
+   - Ve al [sitio oficial de MiKTeX](https://miktex.org/download) y descarga el instalador adecuado para tu versión de Windows.
 
-2. **Instalar MiKTeX**
-   - Ejecuta el instalador y sigue las instrucciones.
-   - Se recomienda habilitar la opción de instalar paquetes faltantes automáticamente.
+2. **Instalar MiKTeX:**
+   - Ejecuta el instalador descargado y sigue las instrucciones en pantalla para completar la instalación.
 
-3. **Instalar Perl**
-   - Algunos flujos de compilación LaTeX y herramientas auxiliares requieren **Perl**.
-   - Descarga e instala **Strawberry Perl** desde:  
-     https://strawberryperl.com/
-   - Durante la instalación, asegúrate de que Perl se agregue al **PATH** del sistema.
-
-4. **Verificar la instalación**
-   - Abre la terminal (cmd o PowerShell) y ejecuta:
-     ```cmd
-     pdflatex --version
-     perl --version
-     ```
-   - Ambos comandos deben responder correctamente.
-
----
+3. **Verificar instalación:**
+   - Abre el terminal de comandos (cmd) y escribe `pdflatex --version` para verificar que MiKTeX se haya instalado correctamente.
 
 ### En Linux (usando TeX Live)
 
@@ -52,8 +36,8 @@ Este proyecto está basado en LaTeX y tiene como objetivo generar un documento p
 
 2. **Instalar LaTeX Workshop:**
    - Abre VSCode y ve a la vista de extensiones (Ctrl+Shift+X).
-   - Busca "LaTeX Workshop" e instálalo.  
-*Se recomienda instalar extensiones adicionales relacionadas a latex como 'LaTeX Utilities' y un corrector de ortografia*
+   - Busca "LaTeX Workshop" e instálalo.
+
 ## Uso de LaTeX Workshop en VSCode
 
 ### 1. Compilación del documento LaTeX
@@ -92,7 +76,7 @@ Después de compilar tu proyecto, pueden generarse archivos auxiliares (como `.a
 
 Primero, debes clonar el repositorio en tu máquina local:
 ```bash
-git clone https://github.com/M4gAn4X/Sistemas-Operativos-3.git
+git clone https://github.com/usuario/repositorio.git
 ```
 
 ### 2. Crear tu rama
@@ -106,7 +90,7 @@ git checkout -b nombre-de-tu-rama
 
 Después de realizar los cambios, añade los archivos modificados al área de preparación:
 ```bash
-git add -A
+git add .
 ```
 Luego, haz un commit con un mensaje descriptivo de lo que has cambiado:
 ```bash
@@ -124,6 +108,11 @@ git push origin nombre-de-tu-rama
 
 A medida que otros miembros del equipo realicen cambios en el repositorio, es importante mantener tu rama actualizada.
 
+#### Cambiar a la rama principal (si no estás en ella)
+
+```bash
+git checkout main
+```
 Si estás trabajando en una rama diferente, reemplaza `main` con el nombre de la rama principal
 
 #### Obtener los últimos cambios del repositorio remoto
@@ -131,7 +120,17 @@ Si estás trabajando en una rama diferente, reemplaza `main` con el nombre de la
 ```bash
 git pull origin main
 ```
+#### Volver a tu rama de trabajo
 
+```bash
+git checkout nombre-de-tu-rama
+```
+
+#### Fusionar los cambios de la rama principal a tu rama de trabajo
+
+```bash
+git merge main
+```
 #### Resolver conflictos
 
 Si hay conflictos durante el `git pull`, Git te pedirá que los resuelvas. Abre los archivos conflictivos, resuelve los conflictos y luego marca los archivos como resueltos:
@@ -142,7 +141,10 @@ Después de resolver los conflictos, haz un nuevo commit:
 ```bash
 git commit -m "Conflictos resueltos"
 ```
-Y finalmente, sube los cambios
+Y finalmente, sube los cambios:
+```bash
+git push
+```
 
 ### 6. Crear un Pull Request
 

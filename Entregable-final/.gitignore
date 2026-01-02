@@ -1,0 +1,25 @@
+# Archivos temporales de LaTeX (se regeneran al compilar)
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.lol
+*.nav
+*.snm
+*.vrb
+*.run.xml
+*.main-blx.bib
+*.bcf
+*.tex.txt
+*.pdf
+# Archivos del sistema (innecesarios)
+.DS_Store
+Thumbs.db
