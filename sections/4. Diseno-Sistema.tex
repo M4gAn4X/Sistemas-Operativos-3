@@ -5,7 +5,43 @@
 \subsubsection{Kernel básico}
 \subsubsection{Gestión de procesos}
 \subsubsection{Gestión de memoria}
+
 \subsubsection{Sistema de archivos}
+%%%%
+
+El sistema de archivos SerenityOS se basa en una estructura jerárquica, similar a los sistemas operativos Unix-like, donde todos los archivos y directorios se organizan bajo un único árbol de directorios. La raíz del sistema de archivos se representa con el símbolo "/", y desde allí se ramifican diversos directorios que contienen archivos del sistema, configuraciones, aplicaciones y datos de usuario, donde incluye varias capas y distintos tipos de sistemas de archivos.
+
+\begin{itemize}
+    \item \textbf{Virtual File System (VFS):} esto actúa como una capa de abstracción entre el usuario y los sistemas de archivos subyacentes, permitiendo su manejo uniforme. Esto facilita las operaciones de entrada/salida, asegurando de esta manera que las solicitudes de los procesos sean gestionadas correctamente sin importar el sistema de archivos físico en uso.
+    \item \textbf{Ext2FS (ext2): } soporta el sistema de archivos ext2 tradicional, utilizado como sistema persistente principal. Permite operaciones de lectura y escritura sobre imágenes de disco o dispositivos que contienen un formato ext2. 
+    \item \textbf{Pseudo-sistemas de archivos:} SerenityOS incluye varios pseudo-sistemas de archivos que proporcionan funcionalidades específicas:
+    \begin{itemize}
+        \item \textbf{ProcFS:} sistema de archivos virtual que expone información de procesos en tiempo de ejecución bajo /proc.
+
+        \item \textbf{DevPtsFS:} gestiona interfaces de terminales pseudodevice bajo /dev/pts. 
+
+        \item \textbf{RAMFS:} sistema de archivos en memoria volátil (no persistente), típicamente montado en /tmp.
+        \item \textbf{Plan9FS:} cliente del protocolo 9P para montar recursos remotos.
+    \end{itemize}
+    \item \textbf{Interacción con mount(2):} el kernel proporciona llamadas al sistema para montar distintos tipos de sistemas de archivos mediante mount(), que usa parámetros como tipo de FS y banderas de montaje para controlar permisos y comportamiento de seguridad. 
+Man Pages de SerenityOS
+\end{itemize}
+
+
 \subsubsection{Interfaz de usuario (CLI mínima)}
+
 \subsection{Políticas de planificación y manejo de recursos}
+El kernel emplea un esquema de multitarea preemptiva, donde se distribuye el tiempo de CPU entre procesos ene ejecución. Con ese concepto, se referiere a que se suspenda la ejecución de un proceso activo para dar paso  a otro según las políticas definidas y el estado del sistema, garantizando que tareas con mayor prioridad o listas para ejercutar obtengan tiempo de CPU sin nececesidad de que el proceso actual ceda explícitamente. 
+
+Para la gestión de recursos, además del CPU, el kernel controla recursos como memoria, dispositivos de E/S y manejor de interrupciones, para ello, utiliza estructuras de control y mecanisos de bloquea para asegurar consistencia y evitar condiciones de carrera.
+
+El VFS y los controladores de FS comparten información sobre el uso de buffers, cache y estructura de datos persistentes para minimizar bloqueos prolongados y permite que el scheduler recupere tiempo de CPU para cuando procesos realizan E/S o esperan recursos.
+
 \subsection{Flujo de ejecución del sistema}
+\begin{enumerate}
+    \item \textbf{Arranque} Para la ejecución del sistema se necesita el siguiente comando
+    \item \textbf{Inicialización del kernel:} el kernel configura su subsistema de scheduloing, inicializa controladores básicos de hardware y configura los sistemas de gestión de memoria, manejo de interrupciones y dispositivos, luego se monta el sistema el archivos de raíz ext2 y se configuran sistemas de archivos virtuales como /proc y /dev.
+    \item \textbf{Inicio de  servicios:}
+    
+    \item \textbf{Ciclo de ejecución del kernel:} una vez que el sistema está operativo, el kernel entra en un bucle donde el scheduler selecciona los procesos listos para ejecutarse, luego, cuando un proceso realiza una llamada al sistema o hay una interrupción de hardware, el control pasa al kernel para manejar la operación. El kernel maneja la transición entre estados de procesos (listo, ejecutado, bloqueado) y actualiza estructuras internas.
+\end{enumerate}
