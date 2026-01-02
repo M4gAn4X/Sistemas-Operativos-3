@@ -1,0 +1,194 @@
+% ==========================
+% Thesis Style File (Compatibilidad total APA + Hyperref)
+% ==========================
+
+\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage{rotating}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{pdflscape}
+% --- Manejo seguro de URLs y citas APA ---
+\usepackage{xurl} % permite cortar URLs largas
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=black, citecolor=black]{hyperref}
+\urlstyle{same} % usa la misma fuente del texto normal
+\usepackage{apacite} % DEBE ir después de hyperref
+
+% --- Compatibilidad de comandos de citación (biblatex -> apacite) ---
+% Algunos entregables previos usan \parencite/\textcite; en este informe unificado
+% se mantiene BibTeX + apacite y se proveen alias compatibles.
+\providecommand{\parencite}[1]{\cite{#1}}
+\providecommand{\textcite}[1]{\citeA{#1}}
+
+% --- Márgenes y espaciados ---
+\oddsidemargin = .5in
+\textwidth = 6in
+\headheight = 0in
+\headsep = 0in
+\topmargin = .25in
+\textheight = 8.5in
+
+\floatsep = .29in
+\textfloatsep = \floatsep
+\intextsep = \floatsep
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% --- Espaciado general ---
+\newcommand{\spacing}{1.8}
+\renewcommand{\baselinestretch}{\spacing}
+
+% --- Sangría de primera línea (APA: 0.5in = 1.27cm) ---
+\setlength{\parindent}{1.27cm}
+
+% --- Notas al pie ---
+\newcommand{\munfootnote}[1]{%
+  \renewcommand{\baselinestretch}{1.0}%
+  \normalsize
+  \footnote{#1}%
+  \renewcommand{\baselinestretch}{\spacing}%
+  \normalsize
+}
+
+% --- Citas largas ---
+\newenvironment{munquote}[1][]{%
+  \renewcommand{\baselinestretch}{1.0}%
+  \normalsize
+  \def\muncite{#1}
+  \vspace{1.5mm}
+  \begin{quote}\sl``}{''\muncite
+  \end{quote}
+  \renewcommand{\baselinestretch}{\spacing}%
+  \normalsize
+}
+
+% =====================
+% Portada
+% =====================
+\newcommand{\thesistitle}[5]{%
+\thispagestyle{empty}
+\begin{center}
+\renewcommand{\baselinestretch}{1.0}%
+\begin{figure}
+  \centering
+  \includegraphics[width=0.25\textwidth]{figures/logo.png}
+  \label{fig:portada}
+\end{figure}
+\textbf{\Large #1}
+\renewcommand{\baselinestretch}{\spacing}%
+
+\vspace{1.0cm}
+
+by \\ #2
+
+\vspace{\fill}
+
+Trabajo de investigación de la asignatura de Sistemas Operativos\\
+#3 \\
+
+\vspace{\fill}
+
+#4 \\
+\vspace{\fill}
+
+#5 \\
+
+\vspace{\fill}
+\end{center}
+}
+
+% =====================
+% Figuras
+% =====================
+\newcommand{\munepsfig}[3][scale=1.0]{%
+  \begin{figure}[!htbp]
+    \centering
+    \vspace{2mm}
+    \includegraphics[#1]{figures/#2.eps}
+    \caption{#3}
+    \label{fig:#2}
+  \end{figure}
+}
+
+\newcommand{\munlepsfig}[3][scale=1.0]{%
+  \begin{sidewaysfigure}[!htbp]
+    \centering
+    \vspace{2mm}
+    \includegraphics[#1]{figures/#2.eps}
+    \caption{#3}
+    \label{fig:#2}
+  \end{sidewaysfigure}
+}
+
+% =====================
+% Figuras textuales
+% =====================
+\newenvironment{muntxtfig}[4][\spacing]{%
+  \begin{figure}[!htbp]
+    \centering
+    \def\muncaption{#3}%
+    \def\munlabel{#2}%
+    \renewcommand{\baselinestretch}{#1}%
+    \normalsize%
+    \begin{minipage}{#4}
+    \hrule \hrule
+    \bigskip
+}{%
+    \hrule \hrule
+    \end{minipage}
+    \renewcommand{\baselinestretch}{\spacing}%
+    \normalsize%
+    \caption{\muncaption}
+    \label{fig:\munlabel}
+  \end{figure}
+}
+
+% =====================
+% Tablas
+% =====================
+\newenvironment{muntab}[3]{%
+  \begin{table}[!htbp]
+    \centering
+    \caption{#3}
+    \label{tab:#2}
+    \vspace{2mm}
+    \begin{tabular}{#1}
+}{%
+    \end{tabular}
+  \end{table}
+}
+
+\newenvironment{munltab}[3]{%
+  \begin{sidewaystable}
+    \centering
+    \caption{#3}
+    \label{tab:#2}
+    \vspace{2mm}
+    \begin{tabular}{#1}
+}{%
+    \end{tabular}
+  \end{sidewaystable}
+}
+
+% =====================
+% Ecuaciones
+% =====================
+\newenvironment{muneqn}[1]{%
+  \begin{equation}
+    \label{eqn:#1}
+}{
+  \end{equation}
+}
+
+% =====================
+% Teoremas y Corolarios
+% =====================
+\newtheorem{cor}{Corollary}
+\newtheorem{thm}{Theorem}
