@@ -1,107 +1,238 @@
 % ==================================================
-% Anexos / Apéndices (Entregable 3)
+% Anexos / Apéndices
 % ==================================================
-\chapter{Anexos}\label{chap:anexos}
 
-En esta sección se incluyen materiales complementarios que respaldan el trabajo realizado en el Entregable 3, con el objetivo de evidenciar el entorno utilizado, el proceso de ejecución/emulación y los elementos técnicos más relevantes.
+% Convertimos los capítulos siguientes a anexos con letras (A, B, C)
+% y forzamos el rótulo "Anexo" en lugar de "Capítulo".
+\appendix
+% En clases book/report, \appendix cambia el rótulo a \appendixname.
+% Con babel (español) suele ser "Apéndice"; lo forzamos a "Anexo".
+\renewcommand{\appendixname}{Anexo}
+\renewcommand{\chaptername}{Anexo}
 
-\section{Diagramas técnicos}
-Esta subsección presenta diagramas que sintetizan el flujo de construcción, instalación y ejecución/emulación de SerenityOS, así como su organización general a nivel de componentes.
+% --------------------------------------------------
+% ANEXO A: Imágenes del sistema
+% --------------------------------------------------
+\newpage
+\chapter{Imágenes del sistema (SerenityOS)}\label{anexo:imagenes}
+
+Este anexo presenta capturas del entorno gráfico y de aplicaciones base de SerenityOS, con el fin de evidenciar la ejecución del sistema y su interfaz de usuario.
 
 \begin{figure}[H]
 \centering
-\IfFileExists{figures/anexos/diagrama-flujo-build-run.png}{%
-\includegraphics[width=0.95\textwidth]{figures/anexos/diagrama-flujo-build-run.png}%
-}{%
-\fbox{\parbox{0.9\textwidth}{\centering\vspace{2.5cm}
-	extbf{Imagen pendiente:} \texttt{figures/anexos/diagrama-flujo-build-run.png}\\
-\vspace{2.5cm}}}%
-}
-\caption{Diagrama del flujo general de trabajo para construir y ejecutar SerenityOS en el host: instalación de dependencias, construcción de toolchain, generación de artefactos y arranque del sistema en QEMU.}\label{fig:anexo-flujo-build-run}
+\includegraphics[width=0.5\textwidth]{figures/serenity-arranque.png}
+\caption{Arranque de SerenityOS en ejecución (evidencia de inicio del sistema).}\label{fig:anexo-a-arranque}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\IfFileExists{figures/anexos/diagrama-componentes-serenityos.png}{%
-\includegraphics[width=0.95\textwidth]{figures/anexos/diagrama-componentes-serenityos.png}%
-}{%
-\fbox{\parbox{0.9\textwidth}{\centering\vspace{2.5cm}
-	extbf{Imagen pendiente:} \texttt{figures/anexos/diagrama-componentes-serenityos.png}\\
-\vspace{2.5cm}}}%
-}
-\caption{Diagrama de componentes a alto nivel: Kernel, bibliotecas base, servicios y aplicaciones de usuario, con sus relaciones principales.}\label{fig:anexo-componentes-serenityos}
+\includegraphics[width=0.5\textwidth]{figures/serenity-escritorio.png}
+\caption{Escritorio y entorno gráfico principal de SerenityOS.}\label{fig:anexo-a-escritorio}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\IfFileExists{figures/anexos/diagrama-estructura-repo.png}{%
-\includegraphics[width=0.95\textwidth]{figures/anexos/diagrama-estructura-repo.png}%
-}{%
-\fbox{\parbox{0.9\textwidth}{\centering\vspace{2.5cm}
-	extbf{Imagen pendiente:} \texttt{figures/anexos/diagrama-estructura-repo.png}\\
-\vspace{2.5cm}}}%
-}
-\caption{Diagrama de la estructura general del repositorio de SerenityOS (directorios principales y propósito de cada uno) como apoyo a la navegación y documentación técnica.}\label{fig:anexo-estructura-repo}
-\end{figure}
-
-\section{Capturas del entorno de desarrollo}
-Se incluyen capturas representativas del entorno utilizado para editar el documento, compilar el sistema y ejecutar la emulación.
-
-\begin{figure}[H]
-\centering
-\IfFileExists{figures/anexos/captura-vscode-workspace.png}{%
-\includegraphics[width=0.95\textwidth]{figures/anexos/captura-vscode-workspace.png}%
-}{%
-\fbox{\parbox{0.9\textwidth}{\centering\vspace{2.5cm}
-	extbf{Imagen pendiente:} \texttt{figures/anexos/captura-vscode-workspace.png}\\
-\vspace{2.5cm}}}%
-}
-\caption{Captura del entorno de edición (Visual Studio Code) con la estructura del repositorio y los archivos de configuración relevantes para el desarrollo y la documentación.}\label{fig:anexo-captura-vscode}
+\includegraphics[width=0.5\textwidth]{figures/serenitiy-CLI.png}
+\caption{Terminal de SerenityOS (línea de comandos) para interacción técnica.}\label{fig:anexo-a-terminal}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\IfFileExists{figures/anexos/captura-build-run-terminal.png}{%
-\includegraphics[width=0.95\textwidth]{figures/anexos/captura-build-run-terminal.png}%
-}{%
-\fbox{\parbox{0.9\textwidth}{\centering\vspace{2.5cm}
-	extbf{Imagen pendiente:} \texttt{figures/anexos/captura-build-run-terminal.png}\\
-\vspace{2.5cm}}}%
-}
-\caption{Captura de terminal durante el flujo de compilación y ejecución mediante el script \texttt{Meta/serenity.sh}.}\label{fig:anexo-captura-terminal}
+\includegraphics[width=0.5\textwidth]{figures/serenitiy-filemanager.png}
+\caption{Administrador de archivos de SerenityOS (navegación del sistema de archivos).}\label{fig:anexo-a-filemanager}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\IfFileExists{figures/anexos/captura-qemu-serenityos.png}{%
-\includegraphics[width=0.95\textwidth]{figures/anexos/captura-qemu-serenityos.png}%
-}{%
-\fbox{\parbox{0.9\textwidth}{\centering\vspace{2.5cm}
-	extbf{Imagen pendiente:} \texttt{figures/anexos/captura-qemu-serenityos.png}\\
-\vspace{2.5cm}}}%
-}
-\caption{Captura de la ventana de QEMU con SerenityOS en ejecución, evidenciando el arranque y el entorno gráfico del sistema.}\label{fig:anexo-captura-qemu}
+\includegraphics[width=0.5\textwidth]{figures/serenity-settings.png}
+\caption{Panel de configuración (Settings) de SerenityOS.}\label{fig:anexo-a-settings}
 \end{figure}
 
-\section{Fragmentos de código ilustrativo}
-Los siguientes fragmentos se presentan como referencia práctica. Se basan en comandos habituales del ecosistema GNU/Linux (consultables mediante \texttt{man} o \texttt{--help}) y en el flujo recomendado por SerenityOS para construir y ejecutar el sistema en modo emulado.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/serenity-browser.png}
+\caption{Navegador web en SerenityOS como ejemplo de aplicación de usuario.}\label{fig:anexo-a-browser}
+\end{figure}
 
-\subsection{Instalación de dependencias (Arch Linux)}
-Ejemplo de instalación de dependencias mínimas en Arch Linux (x86\_64):
+% --------------------------------------------------
+% ANEXO B: Código importante
+% --------------------------------------------------
+\newpage
+\chapter{Códigos importantes}\label{anexo:codigo}
 
+\section{Código de procesos (Process/Thread)}
+{\small
+\begin{verbatim}
+struct LoadResult;
+
+class Process final
+	: public ListedRefCounted<Process, LockType::Spinlock>
+	, public LockWeakable<Process> {
+
+	class ProtectedValues {
+	public:
+		ProcessID pid { 0 };
+		ProcessID ppid { 0 };
+		// FIXME: This should be a NonnullRefPtr
+		RefPtr<Credentials> credentials;
+		RefPtr<ProcessGroup> process_group;
+		RefPtr<TTY> tty;
+		bool dumpable { false };
+		bool executable_is_setid { false };
+		bool has_promises { false };
+		u32 promises { 0 };
+		bool has_execpromises { false };
+		u32 execpromises { 0 };
+		mode_t umask { 022 };
+		VirtualAddress signal_trampoline;
+		Atomic<u32> thread_count { 0 };
+		u8 termination_status { 0 };
+		u8 termination_signal { 0 };
+		SetOnce reject_transition_to_executable_from_writable_prot;
+		SetOnce jailed_until_exit;
+		bool jailed_until_exec { false };
+	};
+
+public:
+	AK_MAKE_NONCOPYABLE(Process);
+	AK_MAKE_NONMOVABLE(Process);
+
+	MAKE_ALIGNED_ALLOCATED(Process, PAGE_SIZE);
+
+	friend class Thread;
+
+	auto with_protected_data(auto&& callback) const
+	{
+		SpinlockLocker locker(m_protected_data_lock);
+		return callback(m_protected_values_do_not_access_directly);
+	}
+
+	auto with_mutable_protected_data(auto&& callback)
+	{
+		SpinlockLocker locker(m_protected_data_lock);
+		unprotect_data();
+		auto guard = ScopeGuard([&] { protect_data(); });
+		return callback(m_protected_values_do_not_access_directly);
+	}
+\end{verbatim}
+}
+
+\section{Código del scheduler (planificación)}
+{\small
+\begin{verbatim}
+enum class ScheduleResult {
+	Success,
+	NoRunnableThreadFound,
+	Delayed,
+};
+
+class Scheduler {
+public:
+	static void initialize();
+	static Thread* create_ap_idle_thread(u32 cpu);
+	static void set_idle_thread(Thread* idle_thread);
+	static void timer_tick();
+	[[noreturn]] static void start();
+	static ScheduleResult pick_next();
+	static ScheduleResult yield();
+	static void context_switch(Thread*);
+	static void enter_current(Thread& prev_thread);
+	static void leave_on_first_switch(InterruptsState);
+	static void prepare_after_exec();
+	static void prepare_for_idle_loop();
+	static Process* colonel();
+	static void idle_loop(void*);
+	static void invoke_async();
+	static void notify_finalizer();
+	static Thread& pull_next_runnable_thread();
+	static Thread* peek_next_runnable_thread();
+	static bool dequeue_runnable_thread(Thread&, bool = false);
+	static void enqueue_runnable_thread(Thread&);
+	static void dump_scheduler_state(bool = false);
+	static bool is_initialized();
+};
+\end{verbatim}
+}
+
+\section{Código de gestión de memoria (MemoryManager / VM)}
+{\small
+\begin{verbatim}
+// This class represents a set of committed physical pages.
+// When you ask MemoryManager to commit pages for you, you get one of these in return.
+// You can allocate pages from it via `take_one()`
+// It will uncommit any (unallocated) remaining pages when destroyed.
+class CommittedPhysicalPageSet {
+	AK_MAKE_NONCOPYABLE(CommittedPhysicalPageSet);
+
+public:
+	CommittedPhysicalPageSet(Badge<MemoryManager>, size_t page_count)
+		: m_page_count(page_count)
+	{
+	}
+
+	CommittedPhysicalPageSet(CommittedPhysicalPageSet&& other)
+		: m_page_count(exchange(other.m_page_count, 0))
+	{
+	}
+
+	~CommittedPhysicalPageSet();
+
+	bool is_empty() const { return m_page_count == 0; }
+	size_t page_count() const { return m_page_count; }
+
+	[[nodiscard]] NonnullRefPtr<PhysicalRAMPage> take_one();
+	void uncommit_one();
+
+	void operator=(CommittedPhysicalPageSet&&) = delete;
+
+private:
+	size_t m_page_count { 0 };
+};
+
+class MemoryManager {
+public:
+	PageFaultResponse handle_page_fault(PageFault const&);
+	enum class ShouldZeroFill {
+		No,
+		Yes
+	};
+	ErrorOr<CommittedPhysicalPageSet> commit_physical_pages(size_t page_count);
+\end{verbatim}
+}
+
+\section{Código relacionado a syscalls de memoria (mmap/munmap/mprotect)}
+{\small
+\begin{verbatim}
+ErrorOr<FlatPtr> sys$mmap(Userspace<Syscall::SC_mmap_params const*>);
+ErrorOr<FlatPtr> sys$mremap(Userspace<Syscall::SC_mremap_params const*>);
+ErrorOr<FlatPtr> sys$munmap(Userspace<void*>, size_t);
+ErrorOr<FlatPtr> sys$set_mmap_name(Userspace<Syscall::SC_set_mmap_name_params const*>);
+ErrorOr<FlatPtr> sys$mprotect(Userspace<void*>, size_t, int prot);
+ErrorOr<FlatPtr> sys$madvise(Userspace<void*>, size_t, int advice);
+ErrorOr<FlatPtr> sys$msync(Userspace<void*>, size_t, int flags);
+\end{verbatim}
+}
+
+% --------------------------------------------------
+% ANEXO C: Manual de usuario
+% --------------------------------------------------
+\newpage
+\chapter{Manual de usuario y ejecución (SerenityOS)}\label{anexo:manual}
+
+Este anexo se divide en: (i) comandos mínimos de ejecución en el host para compilar/ejecutar SerenityOS, y (ii) un resumen de guía de usuario basado en el \emph{User guide} oficial del wiki.
+
+\section{Comandos de ejecución (host Linux)}
+\subsection{Dependencias (ejemplo en Arch Linux)}
+{\small
 \begin{verbatim}
 sudo pacman -S --needed \
 	base-devel cmake curl mpfr libmpc gmp e2fsprogs ninja qemu-desktop \
 	qemu-system-aarch64 ccache rsync unzip
-
-# Opcional:
-# - fuse2fs (imagenes sin root)
-# - clang llvm llvm-libs (para compilar con Clang)
 \end{verbatim}
+}
 
-\subsection{Clonado del repositorio y ejecución del flujo principal}
-Comandos de referencia para obtener el código, compilar y ejecutar mediante emulación (QEMU).
-
+\subsection{Clonado, compilación y ejecución}
+{\small
 \begin{verbatim}
 git clone https://github.com/SerenityOS/serenity.git
 cd serenity
@@ -112,52 +243,75 @@ Meta/serenity.sh run
 # Compila sin arrancar la VM.
 Meta/serenity.sh build
 \end{verbatim}
+}
 
-\subsection{Fragmento ilustrativo de opciones de QEMU}
-En sistemas donde se ejecuta QEMU directamente (en lugar de invocar el wrapper de SerenityOS), la sintaxis general es:
+\section{Manual de usuario (resumen del SerenityOS Wiki)}
 
-\begin{verbatim}
-qemu-system-x86_64 [opciones]
-\end{verbatim}
+Contenido basado en la sección \emph{User guide} del wiki de SerenityOS.
 
-Ejemplo ilustrativo (parámetros frecuentes en entornos de emulación):
+\subsection{Atajos de teclado}
+\begin{center}
+\begin{tabular}{ll}
+	oprule
+	extbf{Atajo} & \textbf{Acción} \\
+\midrule
+{\ttfamily Ctrl + Alt + Space} & Abrir selector de emojis \\
+{\ttfamily Super + Space} & Abrir asistente \\
+{\ttfamily F2} & Renombrar archivo \\
+{\ttfamily Super + Down} & Minimizar ventana \\
+{\ttfamily Super + Up} & Maximizar ventana \\
+{\ttfamily Super + Left} & Acoplar ventana a la izquierda \\
+{\ttfamily Super + Right} & Acoplar ventana a la derecha \\
+{\ttfamily Super + Tab} & Cambiar entre ventanas \\
+{\ttfamily Shift + Alt (mantener)} & Alternar keymaps (mantener Shift y presionar Alt) \\
+{\ttfamily Ctrl + Shift + A} & Paleta de comandos (dentro de aplicaciones) \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-\begin{verbatim}
-qemu-system-x86_64 \
-	-m 2048 \
-	-smp 4 \
-	-display gtk \
-	-serial stdio \
-	-drive file=DISK_IMAGE.img,format=raw,if=virtio
-\end{verbatim}
-
-\section{Manual de usuario básico e instrucciones de ejecución}
-Este manual resume los pasos para reproducir el entorno y ejecutar SerenityOS en modo emulado, así como acciones básicas de uso durante la sesión.
-
-\subsection{Requisitos previos}
+\subsection{Configuración (Settings)}
+La ventana \emph{Settings} contiene varias subcategorías, entre ellas:
 \begin{itemize}
-\item Sistema host GNU/Linux de 64 bits (se utilizó Arch Linux x86\_64).
-\item Conectividad a Internet (descargas iniciales del flujo de build).
-\item Paquetes de build y QEMU instalados (ver fragmento de dependencias).
-\end{itemize}
-
-\subsection{Ejecución paso a paso}
-\begin{enumerate}
-\item Clonar el repositorio de SerenityOS y entrar al directorio de trabajo.
-\item Ejecutar \texttt{Meta/serenity.sh run}. En la primera ejecución es esperable mayor tiempo por descarga de bases y construcción de la toolchain.
-\item Verificar que se abra la ventana de QEMU y que el sistema complete el arranque.
-\end{enumerate}
-
-\subsection{Interacción básica durante la emulación}
-\begin{itemize}
-\item La ventana de QEMU captura teclado y ratón al interactuar con el sistema invitado.
-\item Para liberar el cursor, QEMU utiliza una combinación de teclas conocida como \emph{grab/ungrab} (la combinación específica depende del backend de QEMU y del sistema; puede consultarse en el menú de QEMU o en la documentación del front-end utilizado).
-\item Para finalizar una sesión, puede cerrarse la ventana de QEMU o detenerse el proceso desde la terminal (según cómo se haya lanzado la ejecución).
-\end{itemize}
-
-\subsection{Evidencias esperadas}
-Como evidencia mínima de ejecución, se recomienda adjuntar:
-\begin{itemize}
-\item Captura del comando \texttt{Meta/serenity.sh run} finalizando la compilación e iniciando la ejecución emulada.
-\item Captura de SerenityOS ya iniciado (pantalla principal o una aplicación abierta).
+\item \textbf{Browser:} personalizar opciones del navegador.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/browser.png}
+\caption{Settings: Browser.}\label{fig:anexo-c-settings-browser}
+\end{figure}
+\item \textbf{Clock:} elegir formato de hora y zona horaria.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/clock.png}
+\caption{Settings: Clock.}\label{fig:anexo-c-settings-clock}
+\end{figure}
+\item \textbf{Display:} cambiar fondo, temas, fuentes, tamaño del monitor y número de espacios de trabajo virtuales.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/display.png}
+\caption{Settings: Display.}\label{fig:anexo-c-settings-display}
+\end{figure}
+\item \textbf{Keyboard:} actualizar propiedades del teclado y el \emph{keymap}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/keyboard.png}
+\caption{Settings: Keyboard.}\label{fig:anexo-c-settings-keyboard}
+\end{figure}
+\item \textbf{Mail:} definir valores necesarios para que funcione el cliente de correo.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/mail.png}
+\caption{Settings: Mail.}\label{fig:anexo-c-settings-mail}
+\end{figure}
+\item \textbf{Mouse:} modificar propiedades del mouse y personalizar el tema del cursor.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/mouse.png}
+\caption{Settings: Mouse.}\label{fig:anexo-c-settings-mouse}
+\end{figure}
+\item \textbf{Terminal:} ajustar comportamiento, disposición (layout) y estilo de fuente.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/terminal.png}
+\caption{Settings: Terminal.}\label{fig:anexo-c-settings-terminal}
+\end{figure}
 \end{itemize}
