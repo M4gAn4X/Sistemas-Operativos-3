@@ -1,0 +1,163 @@
+% ==================================================
+% Anexos / Apéndices (Entregable 3)
+% ==================================================
+\chapter{Anexos}\label{chap:anexos}
+
+En esta sección se incluyen materiales complementarios que respaldan el trabajo realizado en el Entregable 3, con el objetivo de evidenciar el entorno utilizado, el proceso de ejecución/emulación y los elementos técnicos más relevantes.
+
+\section{Diagramas técnicos}
+Esta subsección presenta diagramas que sintetizan el flujo de construcción, instalación y ejecución/emulación de SerenityOS, así como su organización general a nivel de componentes.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{figures/anexos/diagrama-flujo-build-run.png}{%
+\includegraphics[width=0.95\textwidth]{figures/anexos/diagrama-flujo-build-run.png}%
+}{%
+\fbox{\parbox{0.9\textwidth}{\centering\vspace{2.5cm}
+	extbf{Imagen pendiente:} \texttt{figures/anexos/diagrama-flujo-build-run.png}\\
+\vspace{2.5cm}}}%
+}
+\caption{Diagrama del flujo general de trabajo para construir y ejecutar SerenityOS en el host: instalación de dependencias, construcción de toolchain, generación de artefactos y arranque del sistema en QEMU.}\label{fig:anexo-flujo-build-run}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\IfFileExists{figures/anexos/diagrama-componentes-serenityos.png}{%
+\includegraphics[width=0.95\textwidth]{figures/anexos/diagrama-componentes-serenityos.png}%
+}{%
+\fbox{\parbox{0.9\textwidth}{\centering\vspace{2.5cm}
+	extbf{Imagen pendiente:} \texttt{figures/anexos/diagrama-componentes-serenityos.png}\\
+\vspace{2.5cm}}}%
+}
+\caption{Diagrama de componentes a alto nivel: Kernel, bibliotecas base, servicios y aplicaciones de usuario, con sus relaciones principales.}\label{fig:anexo-componentes-serenityos}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\IfFileExists{figures/anexos/diagrama-estructura-repo.png}{%
+\includegraphics[width=0.95\textwidth]{figures/anexos/diagrama-estructura-repo.png}%
+}{%
+\fbox{\parbox{0.9\textwidth}{\centering\vspace{2.5cm}
+	extbf{Imagen pendiente:} \texttt{figures/anexos/diagrama-estructura-repo.png}\\
+\vspace{2.5cm}}}%
+}
+\caption{Diagrama de la estructura general del repositorio de SerenityOS (directorios principales y propósito de cada uno) como apoyo a la navegación y documentación técnica.}\label{fig:anexo-estructura-repo}
+\end{figure}
+
+\section{Capturas del entorno de desarrollo}
+Se incluyen capturas representativas del entorno utilizado para editar el documento, compilar el sistema y ejecutar la emulación.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{figures/anexos/captura-vscode-workspace.png}{%
+\includegraphics[width=0.95\textwidth]{figures/anexos/captura-vscode-workspace.png}%
+}{%
+\fbox{\parbox{0.9\textwidth}{\centering\vspace{2.5cm}
+	extbf{Imagen pendiente:} \texttt{figures/anexos/captura-vscode-workspace.png}\\
+\vspace{2.5cm}}}%
+}
+\caption{Captura del entorno de edición (Visual Studio Code) con la estructura del repositorio y los archivos de configuración relevantes para el desarrollo y la documentación.}\label{fig:anexo-captura-vscode}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\IfFileExists{figures/anexos/captura-build-run-terminal.png}{%
+\includegraphics[width=0.95\textwidth]{figures/anexos/captura-build-run-terminal.png}%
+}{%
+\fbox{\parbox{0.9\textwidth}{\centering\vspace{2.5cm}
+	extbf{Imagen pendiente:} \texttt{figures/anexos/captura-build-run-terminal.png}\\
+\vspace{2.5cm}}}%
+}
+\caption{Captura de terminal durante el flujo de compilación y ejecución mediante el script \texttt{Meta/serenity.sh}.}\label{fig:anexo-captura-terminal}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\IfFileExists{figures/anexos/captura-qemu-serenityos.png}{%
+\includegraphics[width=0.95\textwidth]{figures/anexos/captura-qemu-serenityos.png}%
+}{%
+\fbox{\parbox{0.9\textwidth}{\centering\vspace{2.5cm}
+	extbf{Imagen pendiente:} \texttt{figures/anexos/captura-qemu-serenityos.png}\\
+\vspace{2.5cm}}}%
+}
+\caption{Captura de la ventana de QEMU con SerenityOS en ejecución, evidenciando el arranque y el entorno gráfico del sistema.}\label{fig:anexo-captura-qemu}
+\end{figure}
+
+\section{Fragmentos de código ilustrativo}
+Los siguientes fragmentos se presentan como referencia práctica. Se basan en comandos habituales del ecosistema GNU/Linux (consultables mediante \texttt{man} o \texttt{--help}) y en el flujo recomendado por SerenityOS para construir y ejecutar el sistema en modo emulado.
+
+\subsection{Instalación de dependencias (Arch Linux)}
+Ejemplo de instalación de dependencias mínimas en Arch Linux (x86\_64):
+
+\begin{verbatim}
+sudo pacman -S --needed \
+	base-devel cmake curl mpfr libmpc gmp e2fsprogs ninja qemu-desktop \
+	qemu-system-aarch64 ccache rsync unzip
+
+# Opcional:
+# - fuse2fs (imagenes sin root)
+# - clang llvm llvm-libs (para compilar con Clang)
+\end{verbatim}
+
+\subsection{Clonado del repositorio y ejecución del flujo principal}
+Comandos de referencia para obtener el código, compilar y ejecutar mediante emulación (QEMU).
+
+\begin{verbatim}
+git clone https://github.com/SerenityOS/serenity.git
+cd serenity
+
+# Compila y ejecuta SerenityOS en QEMU.
+Meta/serenity.sh run
+
+# Compila sin arrancar la VM.
+Meta/serenity.sh build
+\end{verbatim}
+
+\subsection{Fragmento ilustrativo de opciones de QEMU}
+En sistemas donde se ejecuta QEMU directamente (en lugar de invocar el wrapper de SerenityOS), la sintaxis general es:
+
+\begin{verbatim}
+qemu-system-x86_64 [opciones]
+\end{verbatim}
+
+Ejemplo ilustrativo (parámetros frecuentes en entornos de emulación):
+
+\begin{verbatim}
+qemu-system-x86_64 \
+	-m 2048 \
+	-smp 4 \
+	-display gtk \
+	-serial stdio \
+	-drive file=DISK_IMAGE.img,format=raw,if=virtio
+\end{verbatim}
+
+\section{Manual de usuario básico e instrucciones de ejecución}
+Este manual resume los pasos para reproducir el entorno y ejecutar SerenityOS en modo emulado, así como acciones básicas de uso durante la sesión.
+
+\subsection{Requisitos previos}
+\begin{itemize}
+\item Sistema host GNU/Linux de 64 bits (se utilizó Arch Linux x86\_64).
+\item Conectividad a Internet (descargas iniciales del flujo de build).
+\item Paquetes de build y QEMU instalados (ver fragmento de dependencias).
+\end{itemize}
+
+\subsection{Ejecución paso a paso}
+\begin{enumerate}
+\item Clonar el repositorio de SerenityOS y entrar al directorio de trabajo.
+\item Ejecutar \texttt{Meta/serenity.sh run}. En la primera ejecución es esperable mayor tiempo por descarga de bases y construcción de la toolchain.
+\item Verificar que se abra la ventana de QEMU y que el sistema complete el arranque.
+\end{enumerate}
+
+\subsection{Interacción básica durante la emulación}
+\begin{itemize}
+\item La ventana de QEMU captura teclado y ratón al interactuar con el sistema invitado.
+\item Para liberar el cursor, QEMU utiliza una combinación de teclas conocida como \emph{grab/ungrab} (la combinación específica depende del backend de QEMU y del sistema; puede consultarse en el menú de QEMU o en la documentación del front-end utilizado).
+\item Para finalizar una sesión, puede cerrarse la ventana de QEMU o detenerse el proceso desde la terminal (según cómo se haya lanzado la ejecución).
+\end{itemize}
+
+\subsection{Evidencias esperadas}
+Como evidencia mínima de ejecución, se recomienda adjuntar:
+\begin{itemize}
+\item Captura del comando \texttt{Meta/serenity.sh run} finalizando la compilación e iniciando la ejecución emulada.
+\item Captura de SerenityOS ya iniciado (pantalla principal o una aplicación abierta).
+\end{itemize}

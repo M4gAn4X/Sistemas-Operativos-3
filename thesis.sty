@@ -20,6 +20,11 @@
 \urlstyle{same} % usa la misma fuente del texto normal
 \usepackage{apacite} % DEBE ir después de hyperref
 
+% --- Compatibilidad de comandos de citación (biblatex -> apacite) ---
+% Algunas secciones usan \parencite/\textcite; este informe usa BibTeX + apacite.
+\providecommand{\parencite}[1]{\cite{#1}}
+\providecommand{\textcite}[1]{\citeA{#1}}
+
 % --- Márgenes y espaciados ---
 \oddsidemargin = .5in
 \textwidth = 6in
