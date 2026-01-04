@@ -30,16 +30,36 @@
 % ----- Cuerpo en arábigos -----
 \pagenumbering{arabic}
 
-\input{sections/1. Propuesta-Seleccionada}
-\input{sections/2. Argumentos-Tecnicos}
-\input{sections/3. Argumentos-Pedadogicos}
-\input{sections/4. Diseno-Sistema}
-\input{sections/5. Herramientas-Entorno}
-\input{sections/7. Conclusiones}
+% =============================
+% E1: Investigación y documentación
+% =============================
+\input{sections/e1-01-introduccion}
+\input{sections/e1-02-marco-teorico}
+\input{sections/e1-03-revision-sistemas}
+\input{sections/e1-04-comparacion-tecnica}
+
+% =============================
+% E2: Propuestas y comparación
+% =============================
+\input{sections/e2-01-propuestas-analizadas}
+\input{sections/e2-02-comparacion-tecnica}
+\input{sections/e2-03-analisis-critico}
+
+% =============================
+% E3: Selección, entorno y evidencia
+% =============================
+\input{sections/e3-01-propuesta-seleccionada}
+\input{sections/e3-02-argumentos-tecnicos}
+\input{sections/e3-03-argumentos-pedagogicos}
+\input{sections/e3-04-diseno-sistema}
+\input{sections/e3-05-herramientas-entorno}
+\input{sections/e3-06-conclusiones}
+
 % ----- Bibliografía (BibTeX + apacite) -----
-%\input{bib}
+\input{bib}
 
 % ----- Anexos / Apéndices -----
+\appendix
 \input{anexos}
 
 \end{document}
