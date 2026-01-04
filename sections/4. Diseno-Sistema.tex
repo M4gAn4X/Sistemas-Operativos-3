@@ -1,11 +1,4 @@
-\section{Diseño del sistema operativo propuesto}
-\subsection{Arquitectura general del sistema}
-\subsection{Componentes del sistema operativo}
-\subsubsection{Bootloader}
-\subsubsection{Kernel básico}
-\subsubsection{Gestión de procesos}
-\subsubsection{Gestión de memoria}
-
+\section{Diseño del Sistema Operativo SerenityOS}
 \subsection{Diagrama de Arquitectura General de SerenityOS}
 
 El sistema operativo \texttt{SerenityOS} tiene una arquitectura monolítica que se organiza en varias capas interconectadas. A continuación se describen los componentes clave de su estructura:
@@ -49,9 +42,9 @@ El \texttt{Hardware} representa los componentes físicos del sistema (CPU, memor
 \end{figure}
 
 
-\subsection{Componentes a implementar}
+\subsection{Componentes implementados en SerenityOS}
 
-\subsubsection{Bootloader de SerenityOS}
+\subsubsection{Bootloader}
 
 El \textbf{bootloader} de **SerenityOS** se encarga de inicializar el sistema antes de que el kernel tome control. Su principal función es cargar el kernel en memoria y pasarle parámetros necesarios.
 
@@ -61,7 +54,7 @@ El \textbf{bootloader} de **SerenityOS** se encarga de inicializar el sistema an
   \item \textbf{Framebuffer}: Si el bootloader proporciona un framebuffer, se configura para mostrar la salida gráfica; si no, se usa un framebuffer de texto.
 \end{itemize}
 
-\textbf{Parámetros de arranque}
+\paragraph{Parámetros de arranque}
 
 Algunos parámetros clave que se pueden pasar al kernel incluyen:
 \begin{itemize}
@@ -71,7 +64,7 @@ Algunos parámetros clave que se pueden pasar al kernel incluyen:
   \item \textbf{init}: Define el programa de inicialización que ejecutará el kernel (\texttt{SystemServer} por defecto).
 \end{itemize}
 
-\textbf{Selección de dispositivo de arranque}
+\paragraph{Selección de dispositivo de arranque}
 
 Se pueden usar varias opciones de direccionamiento, como:
 \begin{itemize}
@@ -81,9 +74,9 @@ Se pueden usar varias opciones de direccionamiento, como:
 El bootloader es esencial para preparar el sistema y controlar el arranque del kernel con las configuraciones adecuadas.
 
 
-\subsubsection{Kernel Básico de SerenityOS}
+\subsubsection{Kernel Básico}
 
-El \textbf{kernel} de **SerenityOS** es el núcleo central del sistema operativo, responsable de gestionar los recursos del hardware y proporcionar servicios esenciales para el espacio de usuario. Su diseño está orientado a ser sencillo, pero eficiente, permitiendo la administración de procesos, memoria y dispositivos.
+El \textbf{kernel} de SerenityOS es el núcleo central del sistema operativo, responsable de gestionar los recursos del hardware y proporcionar servicios esenciales para el espacio de usuario. Su diseño está orientado a ser sencillo, pero eficiente, permitiendo la administración de procesos, memoria y dispositivos.
 
 \begin{itemize}
   \item \textbf{Gestión de dispositivos}: El kernel interactúa con el hardware mediante controladores y subsistemas de dispositivos. Algunos de los controladores más importantes incluyen los relacionados con la gráfica (\texttt{GraphicsSubsystem}) y el almacenamiento (\texttt{AHCILocking}).
@@ -93,7 +86,7 @@ El \textbf{kernel} de **SerenityOS** es el núcleo central del sistema operativo
   \item \textbf{Interacción con el espacio de usuario}: El kernel expone datos importantes sobre los procesos y el sistema a través de \texttt{ProcFS} y \texttt{SysFS}, lo que permite que los programas del espacio de usuario interactúen con el sistema de manera eficiente.
 \end{itemize}
 
-\textbf{Componentes clave del Kernel}
+\paragraph{Componentes clave del Kernel}
 
 \begin{itemize}
   \item \textbf{Gestión de gráficos}: El \texttt{Kernel Graphics Subsystem} gestiona todos los dispositivos gráficos, incluyendo aceleración 3D y mapeo de memoria de dispositivos gráficos.
@@ -117,7 +110,7 @@ La \textbf{gestión de procesos} en **SerenityOS** se encarga de crear, gestiona
   \item \textbf{Interacción con el espacio de usuario}: Los programas del espacio de usuario interactúan con los procesos mediante el uso de \texttt{ProcFS} para obtener información sobre el estado de los procesos, como las asignaciones de memoria (\texttt{vm}) y los procesos hijos (\texttt{children}).
 \end{itemize}
 
-\textbf{Componentes clave en la gestión de procesos}
+\paragraph2{Componentes clave en la gestión de procesos}
 
 \begin{itemize}
   \item \textbf{Proceso y Sistema de Archivos \texttt{ProcFS}}: Permite exponer información de los procesos en el sistema de archivos \texttt{/proc}.
@@ -167,14 +160,14 @@ Man Pages de SerenityOS
 
 \subsubsection{Interfaz de usuario (CLI mínima)}
 
-\subsection{Políticas de planificación y manejo de recursos}
+\subsubsection{Políticas de planificación y manejo de recursos}
 El kernel emplea un esquema de multitarea preemptiva, donde se distribuye el tiempo de CPU entre procesos ene ejecución. Con ese concepto, se referiere a que se suspenda la ejecución de un proceso activo para dar paso  a otro según las políticas definidas y el estado del sistema, garantizando que tareas con mayor prioridad o listas para ejercutar obtengan tiempo de CPU sin nececesidad de que el proceso actual ceda explícitamente. 
 
 Para la gestión de recursos, además del CPU, el kernel controla recursos como memoria, dispositivos de E/S y manejor de interrupciones, para ello, utiliza estructuras de control y mecanisos de bloquea para asegurar consistencia y evitar condiciones de carrera.
 
 El VFS y los controladores de FS comparten información sobre el uso de buffers, cache y estructura de datos persistentes para minimizar bloqueos prolongados y permite que el scheduler recupere tiempo de CPU para cuando procesos realizan E/S o esperan recursos.
 
-\subsection{Flujo de ejecución del sistema}
+\subsubsection{Flujo de ejecución del sistema}
 \begin{enumerate}
     \item \textbf{Arranque} Para la ejecución del sistema se necesita el siguiente comando
     \item \textbf{Inicialización del kernel:} el kernel configura su subsistema de scheduloing, inicializa controladores básicos de hardware y configura los sistemas de gestión de memoria, manejo de interrupciones y dispositivos, luego se monta el sistema el archivos de raíz ext2 y se configuran sistemas de archivos virtuales como /proc y /dev.
