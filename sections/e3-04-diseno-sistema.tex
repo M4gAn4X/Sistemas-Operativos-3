@@ -46,7 +46,7 @@ El \texttt{Hardware} representa los componentes físicos del sistema (CPU, memor
 
 \subsubsection{Bootloader}
 
-El \textbf{bootloader} de **SerenityOS** se encarga de inicializar el sistema antes de que el kernel tome control. Su principal función es cargar el kernel en memoria y pasarle parámetros necesarios.
+El \textbf{bootloader} de SerenityOS se encarga de inicializar el sistema antes de que el kernel tome control. Su principal función es cargar el kernel en memoria y pasarle parámetros necesarios.
 
 \begin{itemize}
   \item \textbf{Selección de dispositivo de arranque}: Usando el parámetro \texttt{root={value}}, se especifica el dispositivo desde el cual se va a arrancar el sistema.
@@ -134,7 +134,7 @@ La \textbf{gestión de memoria} en **SerenityOS** es crucial para administrar lo
   \item \textbf{Comprobaciones y Validación}: El \texttt{MemoryManager} valida los accesos a la memoria, asegurándose de que los punteros de la pila y las direcciones de memoria sean correctos antes de permitir operaciones de acceso.
 \end{itemize}
 
-La gestión de memoria en **SerenityOS** asegura una asignación dinámica y eficiente, con protección de áreas críticas y validación de accesos para mantener la estabilidad y seguridad del sistema.
+La gestión de memoria en SerenityOS asegura una asignación dinámica y eficiente, con protección de áreas críticas y validación de accesos para mantener la estabilidad y seguridad del sistema.
 
 \subsubsection{Sistema de archivos}
 %%%%
@@ -159,6 +159,9 @@ Man Pages de SerenityOS
 
 
 \subsubsection{Interfaz de usuario (CLI mínima)}
+La interfaz de usuario en SerenityOS es única y tiene un enfoque nostálgico hacia los sistemas operativos clásicos de los años 90. Aunque SerenityOS no cuenta con una interfaz de línea de comandos (CLI) tradicional como Bash o Zsh, ofrece una experiencia de usuario basada en ventanas y gráficos que recuerda a los sistemas operativos antiguos. La interfaz de línea de comandos (CLI) es una términal con un shell llamado \texttt{Shell}, que permite a los usuarios interactuar con el sistema operativo mediante comandos de texto, funciona de una manera similar a otros shells de Unix, pero con un enfoque más simple y directo.
+
+
 
 \subsubsection{Políticas de planificación y manejo de recursos}
 El kernel emplea un esquema de multitarea preemptiva, donde se distribuye el tiempo de CPU entre procesos ene ejecución. Con ese concepto, se referiere a que se suspenda la ejecución de un proceso activo para dar paso  a otro según las políticas definidas y el estado del sistema, garantizando que tareas con mayor prioridad o listas para ejercutar obtengan tiempo de CPU sin nececesidad de que el proceso actual ceda explícitamente. 
@@ -168,10 +171,15 @@ Para la gestión de recursos, además del CPU, el kernel controla recursos como 
 El VFS y los controladores de FS comparten información sobre el uso de buffers, cache y estructura de datos persistentes para minimizar bloqueos prolongados y permite que el scheduler recupere tiempo de CPU para cuando procesos realizan E/S o esperan recursos.
 
 \subsubsection{Flujo de ejecución del sistema}
+El flujo de ejecución del sistema operativo \texttt{SerenityOS} sigue una secuencia estructurada desde el arranque hasta la operación continua del sistema. A continuación se describen las etapas principales del flujo de ejecución:
+
+Previamente al arranque, se necesitan prerequisitos para arrancar la máquina virtual, como tener instalado \textbf{QEMU} y tener las dependencias necesarias para compilar y ejecutar \texttt{SerenityOS}. Para compilar SerenityOS, se utiliza \textbf{CMake 3.25.0.} y \textbf{GCC 11.2.0} o superior. 
+
+La siguiente parte necesita ser instalada: \verb|bash cmake curl e2fsprogs gawk genext2fs git ninja patch python3 qemu rsync| 
 \begin{enumerate}
-    \item \textbf{Arranque} Para la ejecución del sistema se necesita el siguiente comando
-    \item \textbf{Inicialización del kernel:} el kernel configura su subsistema de scheduloing, inicializa controladores básicos de hardware y configura los sistemas de gestión de memoria, manejo de interrupciones y dispositivos, luego se monta el sistema el archivos de raíz ext2 y se configuran sistemas de archivos virtuales como /proc y /dev.
-    \item \textbf{Inicio de  servicios:}
+    \item \textbf{Arranque:} Para la ejecución del sistema se necesita el siguiente comando. \verb|Meta/serenity.sh run|
+    \item \textbf{Inicialización del kernel:} el kernel configura su subsistema de scheduloing, inicializa controladores básicos de hardware y configura los sistemas de gestión de memoria, manejo de interrupciones y dispositivos, luego se monta el sistema el archivos de raíz ext2 y se configuran sistemas de archivos virtuales como /proc y /dev. Finalmente se inicia 
+    \item \textbf{Inicio de  servicios:} El proceso init se encarga de lanzar servicios básicos necesarios para la operación del sistema, como el servidor gráfico y otros servicios esenciales. A medida que el sistema avanza, init gestiona el arranque de servicios adicionales, aunque el enfoque es más sencillo y modular comparado con sistemas operativos más complejos.
     
     \item \textbf{Ciclo de ejecución del kernel:} una vez que el sistema está operativo, el kernel entra en un bucle donde el scheduler selecciona los procesos listos para ejecutarse, luego, cuando un proceso realiza una llamada al sistema o hay una interrupción de hardware, el control pasa al kernel para manejar la operación. El kernel maneja la transición entre estados de procesos (listo, ejecutado, bloqueado) y actualiza estructuras internas.
 \end{enumerate}
